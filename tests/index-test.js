@@ -1,8 +1,8 @@
 import expect from 'expect'
 import React from 'react'
-import {render, unmountComponentAtNode} from 'react-dom'
+import { render, unmountComponentAtNode } from 'react-dom'
 
-import Component from 'src/'
+import Cond from 'src/'
 
 describe('Component', () => {
   let node
@@ -16,8 +16,14 @@ describe('Component', () => {
   })
 
   it('displays a welcome message', () => {
-    render(<Component/>, node, () => {
-      expect(node.innerHTML).toContain('Welcome to React components')
-    })
+    render(
+      <Cond test={true}>
+        <Cond.State equals={true} render={() => <div>Hello World</div>} />
+      </Cond>,
+      node,
+      () => {
+        expect(node.innerHTML).toContain('Hello World')
+      }
+    )
   })
 })
